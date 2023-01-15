@@ -2,6 +2,7 @@
   "name": "node-crud-api",
   "version": "1.0.0",
   "description": "CRUD API with Node.js",
+  "type": "module",
   "scripts": {
     "start:dev": "nodemon ./src/index.js"
   },
@@ -9,5 +10,8 @@
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3"
   }
 }
