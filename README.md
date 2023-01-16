@@ -11,6 +11,8 @@ A simple Node.js application with CRUD operations.
 
   ![Wrong format](https://github.com/nina-si/node-crud-api/raw/develop/src/assets/error.JPG)
 
+- For checking scenarios, where user is not found, you can generate a valid userID [here](https://www.uuidgenerator.net/version4)
+
 ## Before running:
 
 1. Clone repository:  
@@ -35,13 +37,20 @@ A simple Node.js application with CRUD operations.
 1. Run script:  
    `npm run start:prod`
 
-## Responses checking:
+## To run tests:
+
+1. Run script:  
+   `npm run test`
+
+There are tests for getting empty users list, creating a new user and updating an existing user.
+
+## Responses implementation:
 
 It is convenient to use [Postman](https://www.postman.com/downloads/) to check server responses.
 
 ### GET request:
 
-1. Send a `GET` request to endpoint `/api/users`, for example: http://localhost:3000/api/users.  
+1. Send a `GET` request to endpoint `/api/users` to get the list of all users (it is empty at the beginning), for example: http://localhost:3000/api/users.  
    You can also open this link in the browser.
 
 2. Send a `GET` request to endpoint `/api/users/{userID}` to get information about existing user.
@@ -49,7 +58,7 @@ It is convenient to use [Postman](https://www.postman.com/downloads/) to check s
 ### POST request:
 
 1. Send a `POST` request to endpoint `/api/users`, for example: http://localhost:3000/api/users.  
-    Don't forget to fill in a body for request, for example:
+    Don't forget to fill in a body for request, for example (all properties are required):
 
    `{
     "username": "NN",
@@ -62,12 +71,13 @@ It is convenient to use [Postman](https://www.postman.com/downloads/) to check s
 ### PUT request:
 
 1. Send a `PUT` request to endpoint `/api/users/{userID}`.  
-   You can take a userID from `GET` response).  
-   Don't forget to fill in a body for request, for example:
+    You can take a userID from `GET` response.  
+    Don't forget to fill in a body for request, for example:
 
    `{
  "username": "TEST"
-}`
+}`  
+   Changes will be saved only for valid properties values (for example, if you provide a number instead of string in `username` field, changes will not be applied).
 
 ### DELETE request:
 
