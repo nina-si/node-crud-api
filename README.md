@@ -7,7 +7,7 @@ A simple Node.js application with CRUD operations.
 - Don't forget to rename `.env.example` file before starting app. It was recommended not to push `.env` file to Github due to security issues.
 
 - Please pay attention that you pass the body for request in the right format. For example, there should be NO comma after the last property in JSON:
-  ![Wrong format]('./src/assets/error.JPG')
+  ![Wrong format](https://github.com/nina-si/node-crud-api/raw/develop/src/assets/error.JPG)
 
 ## Before running:
 
@@ -50,7 +50,7 @@ It is convenient to use [Postman](https://www.postman.com/downloads/) to check s
     "hobbies": ["reading"]
 }`
 
-![POST example]('./src/assets/post-example.JPG')
+![POST example](https://github.com/nina-si/node-crud-api/raw/develop/src/assets/post-example.JPG)
 
 ### PUT request:
 
