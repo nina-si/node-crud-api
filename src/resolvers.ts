@@ -16,7 +16,8 @@ export const getUsers = async (res: http.ServerResponse) => {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(users));
   } catch (err) {
-    console.log(err);
+    console.log('Error info: ', err.message);
+    return handleServerError(res, err.message || '');
   }
 };
 
@@ -32,7 +33,8 @@ export const getUserById = async (res: http.ServerResponse, userId: string) => {
       res.end(JSON.stringify(user));
     }
   } catch (err) {
-    console.log(err);
+    console.log('Error info: ', err.message);
+    return handleServerError(res, err.message || '');
   }
 };
 
