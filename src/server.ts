@@ -1,6 +1,7 @@
 import http from 'http';
 import * as uuid from 'uuid';
 import {
+  addNewUser,
   getUserById,
   getUsers,
   handleWrongEndpoint,
@@ -16,6 +17,8 @@ const server = http.createServer(
       if (typeof currentId !== 'string' || !uuid.validate(currentId)) {
         handleWrongId(res);
       } else getUserById(res, currentId);
+    } else if (req.url === '/api/users' && req.method === 'POST') {
+      addNewUser(req, res);
     } else {
       handleWrongEndpoint(res);
     }
