@@ -23,17 +23,17 @@ export const getReqBody = async (req: http.IncomingMessage) => {
   });
 };
 
-export const checkReqDataValid = (rawData: string) => {
+export const checkReqDataValid = (rawData: string): boolean => {
   try {
     const reqData = JSON.parse(rawData);
-    return (
-      'username' in reqData &&
-      'age' in reqData &&
+    const isUsernameValid =
+      'username' in reqData && typeof reqData.username === 'string';
+    const isAgeValid = 'age' in reqData && typeof reqData.age === 'number';
+    const isHobbyValid =
       'hobbies' in reqData &&
-      typeof reqData.username === 'string' &&
-      typeof reqData.age === 'number' &&
-      Array.isArray(reqData.hobbies)
-    );
+      Array.isArray(reqData.hobbies) &&
+      reqData.hobbies.every((elem) => typeof elem === 'string');
+    return isUsernameValid && isAgeValid && isHobbyValid;
   } catch (err) {
     return false;
   }
