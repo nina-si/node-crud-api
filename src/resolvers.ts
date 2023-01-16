@@ -11,3 +11,12 @@ export const getUsers = (res: http.ServerResponse) => {
     console.log(err);
   }
 };
+
+export const handleWrongEndpoint = (res: http.ServerResponse) => {
+  res.writeHead(404, { 'Content-Type': 'application/json' });
+  res.end(
+    JSON.stringify({
+      message: 'Endpoint Not Found: Please use the api/users endpoint',
+    })
+  );
+};
