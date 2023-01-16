@@ -2,11 +2,13 @@
 
 A simple Node.js application with CRUD operations.
 
-**IMPORTANT**
+## IMPORTANT
 
 - Don't forget to rename `.env.example` file before starting app. It was recommended not to push `.env` file to Github due to security issues.
 
-- Please pay attention that you pass the body for request in the right format. For example, there should be NO comma after the last property in JSON:
+- Please pay attention that you pass the body for request in the right format.  
+  For example, there should be **NO comma** after the last property in JSON:
+
   ![Wrong format](https://github.com/nina-si/node-crud-api/raw/develop/src/assets/error.JPG)
 
 ## Before running:
@@ -39,11 +41,14 @@ It is convenient to use [Postman](https://www.postman.com/downloads/) to check s
 
 ### GET request:
 
-1. Send a `GET` request to endpoint `/api/users`, for example: http://localhost:3000/api/users. You can open this link in browser.
+1. Send a `GET` request to endpoint `/api/users`, for example: http://localhost:3000/api/users.  
+   You can also open this link in the browser.
 
 ### POST request:
 
-1. Send a `POST` request to endpoint `/api/users`, for example: http://localhost:3000/api/users. Don't forget to fill in a body for request, for example:
+1. Send a `POST` request to endpoint `/api/users`, for example: http://localhost:3000/api/users.  
+   Don't forget to fill in a body for request, for example:
+
    `{
     "username": "NN",
     "age": 25,
@@ -54,11 +59,16 @@ It is convenient to use [Postman](https://www.postman.com/downloads/) to check s
 
 ### PUT request:
 
-1. Send a `PUT` request to endpoint `/api/users/{userID}` (You can take a userID from `GET` response). Don't forget to fill in a body for request, for example:
+1. Send a `PUT` request to endpoint `/api/users/{userID}`.  
+   You can take a userID from `GET` response).  
+   Don't forget to fill in a body for request, for example:
+
    `{
     "username": "TEST"
-}`
+   }`
 
 ### DELETE request:
 
-1. Send a `DELETE` request to endpoint `/api/users/{userID}` (You can take a userID from `GET` response). You don't need to fill in a body for request.
+1. Send a `DELETE` request to endpoint `/api/users/{userID}`.  
+   You can take a userID from `GET` response.  
+   You don't need to fill in a body for this request.
