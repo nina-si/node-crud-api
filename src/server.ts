@@ -2,6 +2,7 @@ import http from 'http';
 import * as uuid from 'uuid';
 import {
   addNewUser,
+  deleteUser,
   getUserById,
   getUsers,
   handleWrongEndpoint,
@@ -26,6 +27,12 @@ const server = http.createServer(
         handleWrongId(res);
       }
       updateUser(req, res, userId);
+    } else if (req.url.match(/\/api\/users\/\w+/) && req.method === 'DELETE') {
+      const userId = req.url.split('/')[3];
+      if (typeof userId !== 'string' || !uuid.validate(userId)) {
+        handleWrongId(res);
+      }
+      deleteUser(req, res, userId);
     } else {
       handleWrongEndpoint(res);
     }

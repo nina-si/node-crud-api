@@ -1,7 +1,13 @@
 import http from 'http';
 import { MESSAGES } from './constants';
 import { IUser } from './interfaces';
-import { createUser, fetchUsers, findUser, updateEntry } from './userModel';
+import {
+  createUser,
+  deleteEntry,
+  fetchUsers,
+  findUser,
+  updateEntry,
+} from './userModel';
 import { checkReqDataValid, getReqBody } from './utils';
 
 export const getUsers = async (res: http.ServerResponse) => {
@@ -95,6 +101,28 @@ export const updateUser = async (
       const updatedUser = await updateEntry(userId, updatedUserData);
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(updatedUser));
+    } catch (err) {
+      console.log('Error info: ', err.message);
+      return handleServerError(res, err.message || '');
+    }
+  }
+};
+
+export const deleteUser = async (
+  req: http.IncomingMessage,
+  res: http.ServerResponse,
+  userId: string
+) => {
+  const user = (await findUser(userId)) as IUser;
+
+  if (!user) {
+    res.writeHead(404, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ message: MESSAGES.USER_NOT_FOUND_MSG }));
+  } else {
+    try {
+      await deleteEntry(userId);
+      res.writeHead(204);
+      res.end();
     } catch (err) {
       console.log('Error info: ', err.message);
       return handleServerError(res, err.message || '');

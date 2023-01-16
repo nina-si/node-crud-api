@@ -34,3 +34,11 @@ export const updateEntry = async (userId: string, userData: IUser) => {
     resolve(db[index]);
   });
 };
+
+export const deleteEntry = async (userId: string): Promise<void> => {
+  return new Promise(async (resolve, reject) => {
+    db = db.filter((entry: IUser) => entry.id !== userId);
+    await writeFile('./data.json', JSON.stringify(db));
+    resolve();
+  });
+};
