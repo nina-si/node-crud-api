@@ -1,4 +1,5 @@
 import http from 'http';
+import { MESSAGES } from './constants';
 import { createUser, fetchUsers, findUser } from './userModel';
 import { checkReqDataValid, getReqBody } from './utils';
 
@@ -18,7 +19,7 @@ export const getUserById = async (res: http.ServerResponse, userId: string) => {
 
     if (!user) {
       res.writeHead(404, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ message: 'User with this id does not exist' }));
+      res.end(JSON.stringify({ message: MESSAGES.USER_NOT_FOUND_MSG }));
     } else {
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(user));
@@ -32,7 +33,7 @@ export const handleWrongId = (res: http.ServerResponse) => {
   res.writeHead(400, { 'Content-Type': 'application/json' });
   res.end(
     JSON.stringify({
-      message: 'User ID is invalid. Provide valid ID',
+      message: MESSAGES.INVALID_ID_MSG,
     })
   );
 };
@@ -54,8 +55,7 @@ export const addNewUser = async (
     res.writeHead(400, { 'Content-Type': 'application/json' });
     res.end(
       JSON.stringify({
-        message:
-          'Request body data is not valid. Check if all required fields are correct',
+        message: MESSAGES.INVALID_POST_DATA_MSG,
       })
     );
   }
@@ -65,7 +65,7 @@ export const handleWrongEndpoint = (res: http.ServerResponse) => {
   res.writeHead(404, { 'Content-Type': 'application/json' });
   res.end(
     JSON.stringify({
-      message: 'Endpoint Not Found: Please use the api/users endpoint',
+      message: MESSAGES.WRONG_ENDPOINT_MSG,
     })
   );
 };
