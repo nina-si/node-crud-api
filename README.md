@@ -44,10 +44,12 @@ It is convenient to use [Postman](https://www.postman.com/downloads/) to check s
 1. Send a `GET` request to endpoint `/api/users`, for example: http://localhost:3000/api/users.  
    You can also open this link in the browser.
 
+2. Send a `GET` request to endpoint `/api/users/{userID}` to get information about existing user.
+
 ### POST request:
 
 1. Send a `POST` request to endpoint `/api/users`, for example: http://localhost:3000/api/users.  
-   Don't forget to fill in a body for request, for example:
+    Don't forget to fill in a body for request, for example:
 
    `{
     "username": "NN",
@@ -64,8 +66,8 @@ It is convenient to use [Postman](https://www.postman.com/downloads/) to check s
    Don't forget to fill in a body for request, for example:
 
    `{
-    "username": "TEST"
-   }`
+ "username": "TEST"
+}`
 
 ### DELETE request:
 
