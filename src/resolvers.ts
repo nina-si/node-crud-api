@@ -1,13 +1,11 @@
 import http from 'http';
-import { IUser } from './interfaces';
-import { findUser } from './userModel';
-
-let db: IUser[] = require('./data.json');
+import { fetchUsers, findUser } from './userModel';
 
 export const getUsers = async (res: http.ServerResponse) => {
   try {
+    const users = await fetchUsers();
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify(db));
+    res.end(JSON.stringify(users));
   } catch (err) {
     console.log(err);
   }
