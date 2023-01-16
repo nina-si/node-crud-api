@@ -1,8 +1,10 @@
 import { promises as fsPromises } from 'fs';
 import * as http from 'http';
+import path from 'path';
 
 export const writeFile = async (filePath: string, data: string) => {
-  await fsPromises.writeFile(filePath, data);
+  const fullPath = path.resolve(__dirname, filePath);
+  await fsPromises.writeFile(fullPath, data);
 };
 
 export const clearUsersDatabase = async () => {
