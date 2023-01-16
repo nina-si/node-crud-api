@@ -4,4 +4,5 @@ export const MESSAGES = {
   WRONG_ENDPOINT_MSG: 'Endpoint Not Found: Please use the api/users endpoint',
   INVALID_ID_MSG: 'User ID is invalid. Provide valid ID',
   USER_NOT_FOUND_MSG: 'User with this id does not exist',
+  SERVER_ERROR_MSG: 'Error during processing request on server',
 };

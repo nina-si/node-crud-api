@@ -25,3 +25,12 @@ export const createUser = async (user: IUser) => {
     resolve(newUser);
   });
 };
+
+export const updateEntry = async (userId: string, userData: IUser) => {
+  return new Promise(async (resolve, reject) => {
+    const index = db.findIndex((user: IUser) => user.id === userId);
+    db[index] = { userId, ...userData };
+    await writeFile('./data.json', JSON.stringify(db));
+    resolve(db[index]);
+  });
+};

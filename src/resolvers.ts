@@ -1,6 +1,7 @@
 import http from 'http';
 import { MESSAGES } from './constants';
-import { createUser, fetchUsers, findUser } from './userModel';
+import { IUser } from './interfaces';
+import { createUser, fetchUsers, findUser, updateEntry } from './userModel';
 import { checkReqDataValid, getReqBody } from './utils';
 
 export const getUsers = async (res: http.ServerResponse) => {
@@ -61,11 +62,66 @@ export const addNewUser = async (
   }
 };
 
+export const updateUser = async (
+  req: http.IncomingMessage,
+  res: http.ServerResponse,
+  userId: string
+) => {
+  const user = (await findUser(userId)) as IUser;
+
+  if (!user) {
+    res.writeHead(404, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ message: MESSAGES.USER_NOT_FOUND_MSG }));
+  } else {
+    try {
+      const body = (await getReqBody(req)) as string;
+      const bodyData = await JSON.parse(body);
+      const updatedUserData = {
+        username:
+          bodyData.username && typeof bodyData.username === 'string'
+            ? bodyData.username
+            : user.username,
+        age:
+          bodyData.age && typeof bodyData.age === 'number'
+            ? bodyData.age
+            : user.age,
+        hobbies:
+          bodyData.hobbies &&
+          Array.isArray(bodyData.hobbies) &&
+          bodyData.hobbies.every((hobby) => typeof hobby === 'string')
+            ? bodyData.hobbies
+            : user.hobbies,
+      };
+      const updatedUser = await updateEntry(userId, updatedUserData);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(updatedUser));
+    } catch (err) {
+      console.log('Error info: ', err.message);
+      return handleServerError(res, err.message || '');
+    }
+  }
+};
+
 export const handleWrongEndpoint = (res: http.ServerResponse) => {
   res.writeHead(404, { 'Content-Type': 'application/json' });
   res.end(
     JSON.stringify({
       message: MESSAGES.WRONG_ENDPOINT_MSG,
+    })
+  );
+};
+
+export const handleServerError = (
+  res: http.ServerResponse,
+  msg: string = ''
+) => {
+  const errorText = !!msg.length
+    ? `${MESSAGES.SERVER_ERROR_MSG}. Details: ${msg}`
+    : MESSAGES.SERVER_ERROR_MSG;
+  res.writeHead(500, { 'Content-Type': 'application/json' });
+  res.end(
+    JSON.stringify({
+      message: errorText,
     })
   );
 };
