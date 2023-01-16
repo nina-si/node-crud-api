@@ -5,6 +5,10 @@ export const writeFile = async (filePath: string, data: string) => {
   await fsPromises.writeFile(filePath, data);
 };
 
+export const clearUsersDatabase = async () => {
+  await writeFile('./data.json', JSON.stringify([]));
+};
+
 export const getReqBody = async (req: http.IncomingMessage) => {
   return new Promise((resolve, reject) => {
     try {
